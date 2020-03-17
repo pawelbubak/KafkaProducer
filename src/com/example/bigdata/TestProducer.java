@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
@@ -44,9 +45,8 @@ public class TestProducer {
 
         // przeanalizuj poniższy kod aby dowiedzieć się jak on działa
         final File folder = new File(params[0]);
-        File[] listOfFiles = folder.listFiles();
-        String listOfPaths[] = Arrays.stream(listOfFiles).
-                map(File::getAbsolutePath).toArray(String[]::new);
+        File[] listOfFiles = Optional.ofNullable(folder.listFiles()).orElse(new File[0]);
+        String[] listOfPaths = Arrays.stream(listOfFiles).map(File::getAbsolutePath).toArray(String[]::new);
         Arrays.sort(listOfPaths);
         for (final String fileName : listOfPaths) {
             try (Stream<String> stream = Files.lines(Paths.get(fileName)).
@@ -54,7 +54,7 @@ public class TestProducer {
                 // uzupełnij polecenie wysyłające komunikat do odpowiedniego
                 // tematu Kafki. Do wskazania tematu użyj zmiennej params[2]
                 // Kluczem niech będzie wyrażenie String.valueOf(line.hashCode())
-                stream.forEach(line -> //System.out.println(line)
+                stream.forEach(line ->
                         producer.send(new ProducerRecord<>(params[2], String.valueOf(line.hashCode()), line))
                 );
                 TimeUnit.SECONDS.sleep(Integer.parseInt(params[1]));
