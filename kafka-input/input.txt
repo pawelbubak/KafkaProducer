@@ -1,9 +1,0 @@
-New 1, Lorem Ipsum jest tekstem stosowanym jako
-New 2, przykładowy wypełniacz w przemyśle poligraficznym.
-New 3. Został po raz pierwszy użyty w XV w.
-New 4. przez nieznanego drukarza do wypełnienia
-New 5. tekstem próbnej książki.
-New 6) Pięć wieków później zaczął być używany
-New 7) przemyśle elektronicznym,
-New 8) pozostając praktycznie niezmienionym.
-New 9) Za: https://pl.lipsum.com/
